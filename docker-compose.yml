@@ -1,0 +1,43 @@
+version: '3'
+
+services: 
+  docker-mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: aggregator
+      MYSQL_PASSWORD: root
+  docker-rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  docker-importer:
+    image: importer
+    depends_on:
+      - docker-rabbitmq
+    ports:
+      - 8000:8080
+    environment:
+      spring.profiles.active: docker
+      spring.rabbitmq.host: docker-rabbitmq
+      spring.rabbitmq.port: 5672
+      spring.rabbitmq.username: guest
+      spring.rabbitmq.password: guest
+  docker-aggregator:
+    image: aggregator
+    depends_on:
+      - docker-mysql
+      - docker-rabbitmq
+    ports:
+      - 8001:8080
+    environment:
+      spring.profiles.active: docker      
+      spring.datasource.url: jdbc:mysql://docker-mysql:3306/aggregator?createDatabaseIfNotExist=true&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+      spring.datasource.username: root
+      spring.datasource.password: root
+      spring.rabbitmq.host: docker-rabbitmq
+      spring.rabbitmq.port: 5672
+      spring.rabbitmq.username: guest
+      spring.rabbitmq.password: guest
+     
