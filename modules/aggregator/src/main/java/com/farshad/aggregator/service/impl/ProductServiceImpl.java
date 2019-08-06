@@ -35,7 +35,6 @@ public class ProductServiceImpl implements ProductService {
            fetchedProduct.setAvailable(product.isAvailable());
            fetchedProduct.setMeasurementUnits(product.getMeasurementUnits());
            productProcessStatus = ProductProcessStatus.UPDATED;
-           productRepository.save(fetchedProduct);
         }
         logger.debug(">>createOrUpdateProduct: " +product + " result:"+ productProcessStatus);
         return productProcessStatus;
