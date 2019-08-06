@@ -7,6 +7,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: aggregator
       MYSQL_PASSWORD: root
+    volumes:
+      - my-datavolume:/var/lib/mysql
   docker-rabbitmq:
     image: rabbitmq:management
     ports:
@@ -40,4 +42,6 @@ services:
       spring.rabbitmq.port: 5672
       spring.rabbitmq.username: guest
       spring.rabbitmq.password: guest
+volumes:
+  my-datavolume
      
