@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductProcessStatus createOrUpdateProduct(Product product) {
         logger.debug(">>createOrUpdateProduct: " +product);
-        ProductProcessStatus productProcessStatus = null;
+        ProductProcessStatus productProcessStatus;
         Product fetchedProduct = productRepository.findByUuid(product.getUuid());
         if(fetchedProduct == null){
             productRepository.save(product);
@@ -35,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
            fetchedProduct.setAvailable(product.isAvailable());
            fetchedProduct.setMeasurementUnits(product.getMeasurementUnits());
            productProcessStatus = ProductProcessStatus.UPDATED;
+           productRepository.save(fetchedProduct);
         }
         logger.debug(">>createOrUpdateProduct: " +product + " result:"+ productProcessStatus);
         return productProcessStatus;
