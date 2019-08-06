@@ -43,5 +43,5 @@ services:
       spring.rabbitmq.username: guest
       spring.rabbitmq.password: guest
 volumes:
-  my-datavolume
+      my-datavolume: {}
      
