@@ -5,6 +5,11 @@ products in the backend. There are two separate microservices serving this purpo
 Firt one to read products data from a CSV file (Importer) and wrap them into a JSON
 object for the other service to consume.
 The second one to save and maintain the product data received and provide some statistics about them (Aggregator) .
+
+I've used mysql db to persist product information and statistics, and RabbitMq for mesage broker.
+Because updating statistics for a day will generate so many updates for one row in statistics table, I decided
+that make  updating statistics process async. After updating product info, an message is sent to statistics service to update.  
+
 ### Prerequisites
 To compile and run the project, the following tools should be installed:
 
