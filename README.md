@@ -19,7 +19,7 @@ to build the project now run install.sh
 ./install.sh
 ```
 this will build the code and build docker files and push into local docker repository and run docker-compose
-####Importer
+###Importer
 Importer is avaiable at docker-host:8000
 ```
 curl -X POST \
@@ -30,7 +30,7 @@ curl -X POST \
 ```  
 file parameter contains name of uploaded file
 
-####Aggregator
+###Aggregator
 Aggregator is avaiable at docker-host:8001
 Endpoint to list all available products:  
 ```
