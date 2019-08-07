@@ -8,7 +8,7 @@ The second one to save and maintain the product data received and provide some s
 
 I've used mysql db to persist product information and statistics, and RabbitMq for mesage broker.
 Because updating statistics for a day will generate so many updates for one row in statistics table, I decided
-that make  updating statistics process async. After updating product info, an message is sent to statistics service to update.  
+to make  updating statistics process async. After updating product info, an message is sent to statistics service to update.  
 
 ### Prerequisites
 To compile and run the project, the following tools should be installed:
